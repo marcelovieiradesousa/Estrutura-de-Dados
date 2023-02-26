@@ -1,7 +1,5 @@
 public class Pilha {
   NoInteiro refNoEntradaPilha = null;
-  // TODO: Top
-
 
   public void push(NoInteiro novo){
     NoInteiro noAuxiliar = refNoEntradaPilha;
