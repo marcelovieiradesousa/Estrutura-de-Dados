@@ -1,40 +1,41 @@
-public class Fila {
-  private NoInteiro refNoEntradaFila = null;
+public class Fila<T> {
+  private No<T> refNoEntradaFila;
 
   public Fila() {
     this.refNoEntradaFila = null;
   }
 
-  public NoInteiro first() {
+  public T first() {
     if (!isEmpty()) {
-      NoInteiro primeiroNo = refNoEntradaFila;
+      No<T> primeiroNo = refNoEntradaFila;
       while (true) {
-        if (primeiroNo.getRefNo() != null) {
-          primeiroNo = primeiroNo.getRefNo();
+        if (primeiroNo.getProximoNo() != null) {
+          primeiroNo = primeiroNo.getProximoNo();
         } else {
           break;
         }
       }
-      return primeiroNo;
+      return (T) primeiroNo;
     }
     return null;
   }
 
-  public void enqueue(NoInteiro novoNo) {
-    novoNo.setRefNo(refNoEntradaFila);
+  public void enqueue(T object) {
+    No novoNo = new No(object);
+    novoNo.setProximoNo(refNoEntradaFila);
     refNoEntradaFila = novoNo;
   }
 
-  public NoInteiro dequeue() {
+  public No<T> dequeue() {
     if (!isEmpty()) {
-      NoInteiro primeiroNo = refNoEntradaFila;
-      NoInteiro noAuxiliar = refNoEntradaFila;
+      No<T> primeiroNo = refNoEntradaFila;
+      No<T> noAuxiliar = refNoEntradaFila;
       while (true) {
-        if (primeiroNo.getRefNo() != null) {
+        if (primeiroNo.getProximoNo() != null) {
           noAuxiliar = primeiroNo;
-          primeiroNo = primeiroNo.getRefNo();
+          primeiroNo = primeiroNo.getProximoNo();
         } else {
-          noAuxiliar.setRefNo(null);
+          noAuxiliar.setProximoNo(null);
           break;
         }
       }
@@ -50,13 +51,13 @@ public class Fila {
   @Override
   public String toString() {
     String stringRetorno = "";
-    NoInteiro noAuxiliar = refNoEntradaFila;
+    No<T> noAuxiliar = refNoEntradaFila;
 
     if (refNoEntradaFila != null) {
       while (true) {
-        stringRetorno += "[No{dado=" + noAuxiliar.getDado() + "}]--->";
-        if (noAuxiliar.getRefNo() != null) {
-          noAuxiliar = noAuxiliar.getRefNo();
+        stringRetorno += "[No{dado=" + noAuxiliar.getConteudo() + "}]--->";
+        if (noAuxiliar.getProximoNo() != null) {
+          noAuxiliar = noAuxiliar.getProximoNo();
         } else {
           stringRetorno += "null";
           break;
@@ -69,24 +70,24 @@ public class Fila {
   }
 
   public static void main(String[] args) {
-    Fila minhaFila = new Fila();
+    Fila<Integer> minhaFila = new Fila<>();
 
-    minhaFila.enqueue(new NoInteiro(1));
-    minhaFila.enqueue(new NoInteiro(2));
-    minhaFila.enqueue(new NoInteiro(3));
-    minhaFila.enqueue(new NoInteiro(4));
-
-    System.out.println(minhaFila);
-
-    System.out.println(minhaFila.dequeue());
+    minhaFila.enqueue(1);
+    minhaFila.enqueue(2);
+    minhaFila.enqueue(3);
+    minhaFila.enqueue(4);
 
     System.out.println(minhaFila);
 
-    minhaFila.enqueue(new NoInteiro(5));
+    System.out.println("dequeue:::"+minhaFila.dequeue());
 
     System.out.println(minhaFila);
 
-    System.out.println(minhaFila.first());
+    minhaFila.enqueue(5);
+
+    System.out.println("enqueue '5' :::"+minhaFila);
+
+    System.out.println("first:::"+minhaFila.first());
 
     System.out.println(minhaFila);
   }

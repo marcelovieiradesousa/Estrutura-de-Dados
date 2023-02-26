@@ -1,6 +1,6 @@
 public class No<T> {
     private T conteudo;
-    private No proximoNo = null;
+    private No<T> proximoNo = null;
 
     
     public No(T conteudo) {
