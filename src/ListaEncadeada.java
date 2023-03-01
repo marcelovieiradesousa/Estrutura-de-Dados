@@ -34,6 +34,18 @@ public class ListaEncadeada<T> {
     return noPivor.getConteudo();
   }
 
+  @Override
+  public String toString() {
+    String strRetorno = "";
+    No<T> noAux = referenciaEntrada;
+    for(int i=0; i < size(); i++){
+      strRetorno += "[No{conteudo= "+ noAux.getConteudo()+"}]----->";
+      noAux = noAux.getProximoNo();
+    }
+    return strRetorno;
+
+  }
+
   private int size() {
     int tamanhoLista = 0;
     No<T> referenciaAux = referenciaEntrada;
