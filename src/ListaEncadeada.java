@@ -1,6 +1,6 @@
 public class ListaEncadeada<T> {
   private No<T> referenciaEntrada;
-
+  // A referenciaEntrada vai ser sempre o nó de índice 0 para auxiliar a contagem da lista. Caso remova o índice 0, ela passa ser o nó de índice 1 e por aí em diante.
   public ListaEncadeada() {
     this.referenciaEntrada = null;
   }
@@ -8,7 +8,7 @@ public class ListaEncadeada<T> {
   public void add(T conteudo) {
     No<T> novoNo = new No(conteudo);
     if (this.isEmpty()) {
-      referenciaEntrada = novoNo;
+      referenciaEntrada = novoNo; //entrada = nó[0]
       return;
     }
     No<T> noAuxiliar = referenciaEntrada;
@@ -26,7 +26,7 @@ public class ListaEncadeada<T> {
     validaIndice(index);
     No<T> noPivor = getNo(index);
     if (index == 0) {
-      referenciaEntrada = noPivor.getProximoNo();
+      referenciaEntrada = noPivor.getProximoNo();//entrada = nó[1]
       return noPivor.getConteudo();
     }
     No<T> noAnterior = getNo(index - 1);
@@ -39,7 +39,7 @@ public class ListaEncadeada<T> {
     String strRetorno = "";
     No<T> noAux = referenciaEntrada;
     for(int i=0; i < size(); i++){
-      strRetorno += "[No{conteudo= "+ noAux.getConteudo()+"}]----->";
+      strRetorno += "[No{conteudo = "+ noAux.getConteudo()+"}] --->";
       noAux = noAux.getProximoNo();
     }
     return strRetorno;
@@ -104,11 +104,13 @@ public class ListaEncadeada<T> {
 
     System.out.println(minhaListaEncadeada);
 
-    minhaListaEncadeada.remove(3);
+    minhaListaEncadeada.remove(0);
 
     System.out.println(minhaListaEncadeada);
 
+    minhaListaEncadeada.add("teste5");
 
+    System.out.println(minhaListaEncadeada);
 
 }
 }
