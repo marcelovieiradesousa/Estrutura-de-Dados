@@ -28,7 +28,7 @@ public class ListaDuplamenteEncadeada<T> {
     NoDuplo<T> novoNoDuplo = new NoDuplo<>(conteudo);
     novoNoDuplo.setProximoNo(noAux);
     if (novoNoDuplo.getProximoNo() != null) {
-      novoNoDuplo.setAnteriorNo(novoNoDuplo.getAnteriorNo());
+      novoNoDuplo.setAnteriorNo(noAux.getAnteriorNo());
       novoNoDuplo.getProximoNo().setAnteriorNo(novoNoDuplo);
     } else {
       novoNoDuplo.setAnteriorNo(ultimoNo);
@@ -42,8 +42,39 @@ public class ListaDuplamenteEncadeada<T> {
     tamanhoLista++;
   }
 
+  public void remove(int index) {
+    if (index == 0) {
+      primeiroNo = primeiroNo.getProximoNo();
+      if (primeiroNo != null) {
+        primeiroNo.setAnteriorNo(null);
+      }
+    } else {
+      NoDuplo<T> auxNoDuplo = getNo(index);
+      auxNoDuplo.getAnteriorNo().setProximoNo(auxNoDuplo.getProximoNo());
+      if (auxNoDuplo != ultimoNo) {
+        auxNoDuplo.getProximoNo().setAnteriorNo(auxNoDuplo.getAnteriorNo());
+      } else {
+        ultimoNo = auxNoDuplo;
+      }
+    }
+    this.tamanhoLista--;
+  }
+
   public int size() {
     return tamanhoLista;
+  }
+
+  @Override
+  public String toString() {
+    String strRetorno = "";
+    NoDuplo<T> noAuxiliar = primeiroNo;
+    for (int i = 0; i < size(); i++) {
+      strRetorno += "[No{conteudo=" + noAuxiliar.getConteudo() + "}]--->";
+      noAuxiliar = noAuxiliar.getProximoNo();
+    }
+    strRetorno += "null";
+
+    return strRetorno;
   }
 
   public T get(int index) {
@@ -56,5 +87,27 @@ public class ListaDuplamenteEncadeada<T> {
       noAuxiliar = noAuxiliar.getProximoNo();
     }
     return noAuxiliar;
+  }
+
+  public static void main(String[] args) {
+    ListaDuplamenteEncadeada<String> minhaListaDupla = new ListaDuplamenteEncadeada<>();
+
+    minhaListaDupla.add("alvin1");
+    minhaListaDupla.add("alvin2");
+    minhaListaDupla.add("alvin3");
+    minhaListaDupla.add("alvin4");
+    minhaListaDupla.add("alvin5");
+
+    System.out.println(minhaListaDupla);
+
+    minhaListaDupla.remove(4);
+
+    System.out.println(minhaListaDupla);
+
+    minhaListaDupla.add(1, "alvin22");
+
+    System.out.println(minhaListaDupla);
+
+    System.out.println(minhaListaDupla.get(3));
   }
 }
