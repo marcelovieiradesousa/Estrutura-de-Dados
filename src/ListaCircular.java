@@ -82,12 +82,22 @@ public class ListaCircular<T> {
   public static void main(String[] args) {
     ListaCircular<String> minhListaCircular = new ListaCircular<>();
 
-    minhListaCircular.add("pizza1");
+    minhListaCircular.add("pizza0");
 
-    System.out.println((minhListaCircular.toString()));
+    System.out.println(minhListaCircular.toString());
 
     minhListaCircular.remove(0);
 
-    System.out.println((minhListaCircular.toString()));
+    System.out.println(minhListaCircular.toString());
+
+    minhListaCircular.add("motoboy1");
+    minhListaCircular.add("motoboy2");
+    minhListaCircular.add("motoboy3");
+
+    System.out.println(minhListaCircular.toString());
+
+    System.out.println(minhListaCircular.get(0));
+    System.out.println(minhListaCircular.get(1));
+
   }
 }
