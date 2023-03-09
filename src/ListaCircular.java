@@ -4,7 +4,23 @@ public class ListaCircular<T> {
   private int tamanhoLista;
 
   public ListaCircular() {
+    this.cabeça = null;
+    this.cauda = null;
     this.tamanhoLista = 0;
+  }
+
+  public void add(T conteudo){
+    No<T> novoNo = new No<T>(conteudo);
+    if(tamanhoLista == 0){
+      cabeça = novoNo;
+      cauda = cabeça;
+      cabeça.setProximoNo(cauda);
+    }else{
+      novoNo.setProximoNo(cauda);
+      cabeça.setProximoNo(novoNo);
+      cabeça = novoNo;
+    }
+    tamanhoLista++;
   }
 
   public Boolean isEmpty() {
@@ -50,5 +66,16 @@ public class ListaCircular<T> {
       noAuxiliar = noAuxiliar.getProximoNo();
     }
     return noAuxiliar;
+  }
+  @Override
+  public String toString() {
+      String strRetorno = "";
+      No<T> noAuxiliar = this.cauda;
+      for(int i = 0; i < size(); i++){
+          strRetorno += "[No{conteudo=" + noAuxiliar.getConteudo() +"}]--->";
+          noAuxiliar = noAuxiliar.getProximoNo();
+      }
+      strRetorno += size() != 0 ? "(Retorna ao início)" : "[]";
+      return strRetorno;
   }
 }
