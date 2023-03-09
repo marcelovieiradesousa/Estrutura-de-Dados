@@ -18,7 +18,7 @@ public class ListaCircular<T> {
     }else{
       novoNo.setProximoNo(cauda);
       cabeça.setProximoNo(novoNo);
-      cabeça = novoNo;
+      cauda = novoNo;
     }
     tamanhoLista++;
   }
@@ -77,5 +77,17 @@ public class ListaCircular<T> {
       }
       strRetorno += size() != 0 ? "(Retorna ao início)" : "[]";
       return strRetorno;
+  }
+
+  public static void main(String[] args) {
+    ListaCircular<String> minhListaCircular = new ListaCircular<>();
+
+    minhListaCircular.add("pizza1");
+
+    System.out.println((minhListaCircular.toString()));
+
+    minhListaCircular.remove(0);
+
+    System.out.println((minhListaCircular.toString()));
   }
 }
